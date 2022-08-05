@@ -1,0 +1,49 @@
+<form #form="ngForm" (submit)="submeterFormulario(form)" [formGroup]="grupoValidacoes">
+  <div class="container p-5 shadow-sm mt-3 rounded border">
+
+    <input *ngIf="usuario" type="hidden" name="id" [value]="service.formData.id" />
+
+    <h5 class="my-3">
+      <span *ngIf="!hasValue">NOVO</span>
+      <span *ngIf="hasValue">EDITAR</span>
+      USUÁRIO
+    </h5>
+
+    <div class="form-group">
+      <label for="nome">Nome</label>
+      <input type="text" class="form-control" formControlName="nome" [(ngModel)]="service.formData.nome" required>
+    </div>
+
+    <div class="form-group">
+      <label for="sobrenome">Sobrenome</label>
+      <input type="text" class="form-control" formControlName="sobrenome" [(ngModel)]="service.formData.sobrenome" required>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" [(ngModel)]="service.formData.email" formControlName="email" required>
+    </div>
+
+    <div class="form-group">
+      <label for="data-nascimento">Data nascimento</label>
+      <input type="date" class="form-control" [(ngModel)]="service.formData.dataNascimento" formControlName="dataNascimento" required>
+    </div>
+
+    <div class="form-group">
+      <label for="escolaridade">Escolaridade</label>
+      <select formControlName="escolaridade" class="form-control" [(ngModel)]="service.formData.escolaridade" required>
+        <option value="0">Infantil</option>
+        <option value="1">Fundamental</option>
+        <option value="2">Médio</option>
+        <option value="3">Superior</option>
+      </select>
+    </div>
+    <div class="row mx-0 justify-content-end">
+      <button *ngIf="!hasValue" type="submit" class="btn btn-primary">Enviar</button>
+      <button *ngIf="hasValue" type="button" (click)="atualizarUsuario(form)" class="btn btn-primary">Enviar</button>
+
+    </div>
+  </div>
+</form>
+
+<a class="text-primary" routerLink="/">Voltar</a>
